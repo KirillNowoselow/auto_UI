@@ -3,6 +3,7 @@ import com.codeborne.selenide.WebDriverRunner;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import pages.CheckBoxPage;
 import pages.ElementsPage;
 import pages.MainPage;
 import pages.TextBoxPage;
@@ -17,8 +18,7 @@ public class ElementsTests extends BaseTest {
 
     @Test(description = "Тест ввода данных в textBox ")
     public void textBoxTest() throws InterruptedException {
-        MainPage mainPage = new MainPage();
-        ElementsPage elementsPage = mainPage.goToElements();
+        ElementsPage elementsPage = new MainPage().goToElements();
         Assert.assertEquals(WebDriverRunner.getWebDriver().getCurrentUrl(),"https://demoqa.com/elements");
 
         TextBoxPage textBoxPage = elementsPage.goToTextBox();
@@ -34,7 +34,20 @@ public class ElementsTests extends BaseTest {
 
         Assert.assertEquals(textBoxPage.getOutPutData().get("Name"), name);
 
+        Thread.sleep(5000);
+    }
 
+    @Test
+    public void checkBoxTest() throws InterruptedException {
+        ElementsPage elementsPage = new MainPage().goToElements();
+
+        CheckBoxPage checkBoxPage = elementsPage.goToCheckBox();
+        Assert.assertEquals(WebDriverRunner.getWebDriver().getCurrentUrl(),"https://demoqa.com/checkbox");
+
+        checkBoxPage.clickCheckAllBox();
+        Assert.assertEquals(checkBoxPage.getResultsList(), checkBoxPage.getAllCheckBoxTutlesList());
+        System.out.println(checkBoxPage.getResultsList());
+        System.out.println(checkBoxPage.getAllCheckBoxTutlesList());
         Thread.sleep(5000);
     }
 }

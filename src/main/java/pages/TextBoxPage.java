@@ -20,7 +20,6 @@ public class TextBoxPage {
     private final SelenideElement submitButton = $x("//button[@id='submit']");
     private final ElementsCollection outputElements = $$x("//div[@id='output']//p");
 
-
     public void inputFullName(String value) {
          fullName.setValue(value);
     }
