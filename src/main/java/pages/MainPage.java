@@ -1,11 +1,12 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import service.BaseTest;
 
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.open;
 
-public class MainPage extends BasePage{
+public class MainPage extends BaseTest {
     public MainPage() {
         open("https://demoqa.com/");
     }

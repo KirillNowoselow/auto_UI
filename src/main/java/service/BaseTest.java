@@ -1,19 +1,14 @@
-package pages;
+package service;
 
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
-import config.TestConfig;
+import service.TestConfig;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.PageLoadStrategy;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import steps.Steps;
 
-public class BasePage {
-    @BeforeClass
+public class BaseTest implements Steps {
+    @BeforeMethod
     public void setUp(){
         WebDriverManager.chromedriver().setup();
         TestConfig.initConfig();

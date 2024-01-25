@@ -1,10 +1,7 @@
-package config;
+package service;
 
 import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.PageLoadStrategy;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 
 public class TestConfig {
     public static String browser = "chrome";
@@ -13,8 +10,12 @@ public class TestConfig {
         browser = System.getProperty("browser") == null ? "chrome" : System.getProperty("browser");
         Configuration.baseUrl = baseUrl;
         Configuration.pageLoadStrategy = String.valueOf(PageLoadStrategy.NONE);
-        Configuration.holdBrowserOpen = false;
-        Configuration.screenshots = false;
         Configuration.browserSize = "1920x1080";
+        Configuration.timeout = 5000;
+        Configuration.holdBrowserOpen = false;
+        Configuration.fastSetValue = true;
+        Configuration.webdriverLogsEnabled = true;
+        Configuration.screenshots = false;
+        Configuration.headless = false;
     }
 }
