@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class ElementsTests extends BaseTest {
 
-    @Test(description = "Тест ввода данных в textBox ")
+    @Test(description = "Тест ввода данных в textBox")
     public void textBoxTest() throws InterruptedException {
         ElementsPage elementsPage = new MainPage().goToElements();
         Assert.assertEquals(WebDriverRunner.getWebDriver().getCurrentUrl(),"https://demoqa.com/elements");
@@ -37,17 +37,23 @@ public class ElementsTests extends BaseTest {
         Thread.sleep(5000);
     }
 
-    @Test
+    @Test(description = "Тест checkBox")
     public void checkBoxTest() throws InterruptedException {
         ElementsPage elementsPage = new MainPage().goToElements();
 
         CheckBoxPage checkBoxPage = elementsPage.goToCheckBox();
         Assert.assertEquals(WebDriverRunner.getWebDriver().getCurrentUrl(),"https://demoqa.com/checkbox");
 
-        checkBoxPage.clickCheckAllBox();
-        Assert.assertEquals(checkBoxPage.getResultsList(), checkBoxPage.getAllCheckBoxTutlesList());
-        System.out.println(checkBoxPage.getResultsList());
-        System.out.println(checkBoxPage.getAllCheckBoxTutlesList());
+        CHECK_BOX_PAGE_STEPS.allCheckBoxSelection(checkBoxPage);
+        Assert.assertEquals(checkBoxPage.getResultsTitlesList(), checkBoxPage.getAllCheckBoxes());
+        System.out.println(checkBoxPage.getResultsTitlesList());
+        System.out.println(checkBoxPage.getAllCheckBoxes());
+
+        CHECK_BOX_PAGE_STEPS.allCheckBoxSelection(checkBoxPage);
+        CHECK_BOX_PAGE_STEPS.checkBoxSelection(checkBoxPage);
+        Assert.assertEquals(checkBoxPage.getResultsTitlesList(),checkBoxPage.getSelectedCheckBoxes());
+        System.out.println(checkBoxPage.getResultsTitlesList());
+        System.out.println(checkBoxPage.getSelectedCheckBoxes());
         Thread.sleep(5000);
     }
 }
