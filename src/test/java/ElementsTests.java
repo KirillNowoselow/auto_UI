@@ -3,10 +3,7 @@ import com.codeborne.selenide.WebDriverRunner;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import pages.CheckBoxPage;
-import pages.ElementsPage;
-import pages.MainPage;
-import pages.TextBoxPage;
+import pages.*;
 import service.BaseTest;
 import utils.RandomGenerator;
 
@@ -16,32 +13,27 @@ import java.util.Map;
 
 public class ElementsTests extends BaseTest {
 
+    private final String name = RandomGenerator.generateRandomString(8);
+    private final String email = RandomGenerator.generateRandomEmail();
+    private final String address = RandomGenerator.generateRandomString(10);
+    private final String string = RandomGenerator.generateRandomString(10);
     @Test(description = "Тест ввода данных в textBox")
     public void textBoxTest() throws InterruptedException {
-        ElementsPage elementsPage = new MainPage().goToElements();
+        ElementsPage elementsPage = new MainPage().goToElementsPage();
         Assert.assertEquals(WebDriverRunner.getWebDriver().getCurrentUrl(),"https://demoqa.com/elements");
 
-        TextBoxPage textBoxPage = elementsPage.goToTextBox();
+        TextBoxPage textBoxPage = elementsPage.goToTextBoxPage();
         Assert.assertEquals(WebDriverRunner.getWebDriver().getCurrentUrl(),"https://demoqa.com/text-box");
 
-        String name = RandomGenerator.generateRandomString(8);
-        String email = RandomGenerator.generateRandomEmail();
-        String currAddress = RandomGenerator.generateRandomString(10);
-        String permAddress = RandomGenerator.generateRandomString(10);
-
-        TEXT_BOX_PAGE_STEPS.fillTextBoxForm(textBoxPage, name, email, currAddress, permAddress);
+        TEXT_BOX_PAGE_STEPS.fillTextBoxForm(textBoxPage, name, email, address, address);
         TEXT_BOX_PAGE_STEPS.clickSubmit(textBoxPage);
 
         Assert.assertEquals(textBoxPage.getOutPutData().get("Name"), name);
-
-        Thread.sleep(5000);
     }
 
     @Test(description = "Тест checkBox")
     public void checkBoxTest() throws InterruptedException {
-        ElementsPage elementsPage = new MainPage().goToElements();
-
-        CheckBoxPage checkBoxPage = elementsPage.goToCheckBox();
+        CheckBoxPage checkBoxPage = new MainPage().goToElementsPage().goToCheckBoxPage();
         Assert.assertEquals(WebDriverRunner.getWebDriver().getCurrentUrl(),"https://demoqa.com/checkbox");
 
         CHECK_BOX_PAGE_STEPS.allCheckBoxSelection(checkBoxPage);
@@ -54,6 +46,25 @@ public class ElementsTests extends BaseTest {
         Assert.assertEquals(checkBoxPage.getResultsTitlesList(),checkBoxPage.getSelectedCheckBoxes());
         System.out.println(checkBoxPage.getResultsTitlesList());
         System.out.println(checkBoxPage.getSelectedCheckBoxes());
-        Thread.sleep(5000);
+    }
+
+    @Test(description = "Тест radioButton")
+    public void radioButtonTest() throws InterruptedException {
+        RadioButtonPage radioButtonPage = new MainPage().goToElementsPage().goToRadioButtonPade();
+        Assert.assertEquals(WebDriverRunner.getWebDriver().getCurrentUrl(), "https://demoqa.com/radio-button");
+
+        radioButtonPage.selectYesRadio();
+        radioButtonPage.selectImpressiveRadio();
+        radioButtonPage.selectNoRadio();
+    }
+
+    @Test(description = "Тест webTables")
+    public void webTablesTest() throws InterruptedException {
+        WebTablesPage webTablesPage = new MainPage().goToElementsPage().goToWebTablesPage();
+        Assert.assertEquals(WebDriverRunner.getWebDriver().getCurrentUrl(), "https://demoqa.com/webtables");
+
+        WEB_TABLES_PAGE_STEPS.clickAddRecordBtn(webTablesPage);
+        WEB_TABLES_PAGE_STEPS.fillRegistrationForm(webTablesPage, name, name, email, 1, 1, string);
+        webTablesPage.clickSubmitBtn();
     }
 }

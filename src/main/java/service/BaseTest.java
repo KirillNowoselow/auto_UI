@@ -15,7 +15,8 @@ public class BaseTest implements Steps {
     }
 
     @AfterMethod
-    public static void tearDown(){
+    public static void tearDown() throws InterruptedException {
+        Thread.sleep(5000);
         Selenide.webdriver().driver().close();
     }
 }
