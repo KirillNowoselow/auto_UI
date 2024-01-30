@@ -1,18 +1,16 @@
 package steps;
 
 import io.qameta.allure.Step;
-import pages.CheckBoxPage;
+import org.testng.Assert;
+import pages.checkBoxPage.CheckBoxPage;
 
 public class CheckBoxPageSteps {
     @Step("Выбор всех checkBox")
     public void allCheckBoxSelection(CheckBoxPage checkBoxPage){
-        checkBoxPage.clickCheckBoxAll();
-    }
-
-    @Step("Выбор определенных checkBox: Desktop, WorkSpace, Private")
-    public void checkBoxSelection(CheckBoxPage checkBoxPage){
-        checkBoxPage.clickCheckBoxDesktop();
-        checkBoxPage.clickCheckBoxWorkSpace();
-        checkBoxPage.clickCheckBoxPrivate();
+        checkBoxPage.checkBoxFrame.openAllCheckBoxes();
+        checkBoxPage.checkBoxFrame.clickCheckBoxHome();
+        Assert.assertEquals(checkBoxPage.checkBoxFrame.getResultsTitlesList(), checkBoxPage.checkBoxFrame.getSelectedCheckBoxes());
+        System.out.println(checkBoxPage.checkBoxFrame.getResultsTitlesList());
+        System.out.println(checkBoxPage.checkBoxFrame.getSelectedCheckBoxes());
     }
 }

@@ -1,13 +1,10 @@
-package pages;
+package pages.radioButtonPage.frames;
 
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Condition.disabled;
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
 
-public class RadioButtonPage {
+public class RadioButtonFrame {
     private final SelenideElement yesRadio = $x("//label[@for='yesRadio']");
     private final SelenideElement impressiveRadio = $x("//label[@for='impressiveRadio']");
     private final SelenideElement noRadio = $x("//label[@for='noRadio']");

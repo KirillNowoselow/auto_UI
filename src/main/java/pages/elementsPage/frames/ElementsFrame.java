@@ -1,12 +1,14 @@
-package pages;
+package pages.elementsPage.frames;
 
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.conditions.Text;
-import service.BaseTest;
+import pages.checkBoxPage.CheckBoxPage;
+import pages.radioButtonPage.RadioButtonPage;
+import pages.textBoxPage.TextBoxPage;
+import pages.webTadlesPage.WebTablesPage;
 
 import static com.codeborne.selenide.Selenide.$x;
 
-public class ElementsPage extends BaseTest {
+public class ElementsFrame {
     private final SelenideElement textBoxPage = $x("//span[text()='Text Box']/..");
     private final SelenideElement checkBoxPage = $x("//span[text()='Check Box']/..");
     private final SelenideElement radioButtonPage = $x("//span[text()='Radio Button']/..");
